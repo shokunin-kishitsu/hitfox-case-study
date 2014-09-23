@@ -1,0 +1,11 @@
+<div>
+  Welcome!  Please sign in
+
+  <%= form_tag auth_sign_in_path do %>
+    <%= text_field_tag :login %>
+    <%= password_field_tag :password %>
+    <%= submit_tag :signin %>
+  <% end %>
+
+  or <%= link_to 'sign up', auth_register_path %>.
+</div>
