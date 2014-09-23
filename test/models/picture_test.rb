@@ -1,7 +1,10 @@
 require 'test_helper'
 
 class PictureTest < ActiveSupport::TestCase
-  test "the truth" do
-    assert true
+
+  test "create picture" do
+    picture = Picture.new
+    assert picture
   end
+
 end

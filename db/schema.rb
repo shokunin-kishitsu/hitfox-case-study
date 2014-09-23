@@ -11,9 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140923085057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: true do |t|
+    t.string "name"
+  end
+
+  create_table "collections", force: true do |t|
+    t.string  "name"
+    t.integer "user_id"
+  end
+
+  create_table "monuments", force: true do |t|
+    t.string  "name"
+    t.string  "description"
+    t.integer "collection_id"
+    t.integer "category_id"
+  end
+
+  add_index "monuments", ["category_id"], name: "index_monuments_on_category_id", using: :btree
+  add_index "monuments", ["collection_id"], name: "index_monuments_on_collection_id", using: :btree
+
+  create_table "pictures", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "date"
+    t.integer  "monument_id"
+    t.integer  "image"
+  end
+
+  create_table "users", force: true do |t|
+    t.string "login"
+    t.string "password"
+  end
 
 end
