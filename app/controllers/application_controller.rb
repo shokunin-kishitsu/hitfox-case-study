@@ -4,10 +4,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_filter :check_login
+  helper_method :current_user
 
   def check_login
-    if session[:id].nil?
+    if current_user.nil?
       render 'auth/login'
     end
+  end
+
+  private
+
+  def current_user
+    User.find(session[:id])
   end
 end

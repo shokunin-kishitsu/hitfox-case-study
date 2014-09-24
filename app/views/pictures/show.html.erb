@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<%= @picture.name %>
+<%= @picture.description %>
+<td><img src='<%= @picture.image.url %>' /></td>
+
+<br>
+
+<%= link_to 'Edit Picture', edit_picture_path(@picture) %> |
+<%= link_to 'Back to Monument', monument_path(@monument) %>

@@ -1,0 +1,38 @@
+
+<% @collections.each do |collection| %>
+  <h1>Collection: <%= collection.name %></h1>
+    <%= link_to 'Edit', edit_collection_path(collection) %>
+    <%= link_to 'Destroy', collection, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <div class='monuments'>
+
+    <% collection.monuments.each do |monument| %>
+      <h2>Monument: <span class='monument-name'><%= monument.name %></span></h2>
+      <%= link_to 'Edit', edit_monument_path(monument) %>
+      <%= link_to 'Destroy', monument, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <p>Category: <span class='category-name'><%= monument.category.try(:name) %></span> <%= link_to 'Edit Categories', categories_url %></p>
+      <p>Description: <%= monument.description %></p>
+
+      <div class='pictures'>
+        <% monument.pictures.each do |picture| %>
+          <div class='picture'>
+            <h3><%= picture.name %></h3>
+            <%= link_to 'Edit', edit_picture_path(picture) %>
+            <%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <p>Date: <%= picture.created_at %></p>
+            <p>Description: <%= picture.description %></p>
+            <img src='<%= picture.image %>' style='width: 100px'>
+          </div>
+        <% end %>
+        <br>
+        <%= link_to 'Add Picture', new_monument_picture_path(monument) %>
+      </div>
+
+    <% end %>
+    <br>
+    <%= link_to 'Add Monument', new_collection_monument_path(collection) %>
+  </div>
+<% end %>
+
+<br>
+
+<%= link_to 'Add Collection', new_collection_path %>

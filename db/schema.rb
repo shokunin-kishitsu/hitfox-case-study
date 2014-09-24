@@ -41,7 +41,9 @@ ActiveRecord::Schema.define(version: 20140923085057) do
     t.string   "description"
     t.datetime "date"
     t.integer  "monument_id"
-    t.integer  "image"
+    t.string   "image"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

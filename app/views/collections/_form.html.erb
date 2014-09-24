@@ -1,0 +1,19 @@
+<%= form_for(@collection) do |f| %>
+  <% if @collection.errors.any? %>
+    <div id="error_explanation">
+
+      <ul>
+      <% @collection.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label 'Collection:' %><br>
+  <%= f.text_field :name %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

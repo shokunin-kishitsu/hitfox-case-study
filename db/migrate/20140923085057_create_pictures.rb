@@ -5,7 +5,9 @@ class CreatePictures < ActiveRecord::Migration
       t.string :description
       t.datetime :date
       t.references :monument
+      t.string :image
+
+      t.timestamps
     end
-    add_column :pictures, :image, :oid
   end
 end

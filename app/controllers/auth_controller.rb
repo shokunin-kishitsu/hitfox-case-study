@@ -5,15 +5,15 @@ class AuthController < ApplicationController
   def sign_in
     login = params[:login]
     password = params[:password]
-    user = User.find_by_login_and_password(login, password)
-    login(user)
+    user = User.find_by_login(login).try(:authenticate, password)
+    validate(user, 'Incorrect username and/or password')
   end
 
   def sign_up
     login = params[:login]
     password = params[:password]
     user = User.create(login: login, password: password)
-    login(user)
+    validate(user, 'Could not register user')
   end
 
   def sign_out
@@ -23,8 +23,12 @@ class AuthController < ApplicationController
 
   private
 
-  def login user
-    session[:id] = user.id if user.present?
+  def validate user, error_msg
+    if user
+      session[:id] = user.id
+    else
+      flash[:error] = error_msg
+    end
     redirect_to root_path
   end
 

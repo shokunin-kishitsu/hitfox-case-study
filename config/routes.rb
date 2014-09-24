@@ -10,7 +10,15 @@ Rails.application.routes.draw do
     post 'sign_up'
   end
 
-  root 'welcome#index'
+  resources :collections, shallow: true do
+    resources :monuments, shallow: true do
+      resources :pictures
+    end
+  end
+
+  resources :categories
+
+  root to: 'collections#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,0 +1,25 @@
+<%= form_for(@picture, url: @path) do |f| %>
+  <% if @picture.errors.any? %>
+    <div id="error_explanation">
+
+      <ul>
+      <% @picture.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label 'Picture name:' %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label 'Description:' %>
+  <%= f.text_area :description %>
+  <br>
+  <%= f.label 'Image:' %>
+  <%= f.file_field :image %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
